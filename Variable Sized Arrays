@@ -1,0 +1,20 @@
+#include<iostream>
+using namespace std;
+ int n,q,i,j,x,y; 
+ int o =0; int main() {
+      cin>>n>>q; int* a[n];
+       while(o < n){ 
+           cin>>x; a[o] = new int[x];
+
+    for (int p =0; p<x ; p++){
+        cin>>y; 
+        a[o][p] = y; 
+    }
+    o++;
+}
+for(int w=0; w<q;w++){
+    cin>>i>>j;
+    cout<<a[i][j]<<endl;
+}
+return 0;
+}
