@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+void modify(int *p1, int *p2)
+{ int sum = *p1 + *p2; int diff = *p1 - *p2; *p1 = sum;
+*p2 = abs(diff);  }
+
+int main(){
+
+int a, b;
+
+cin >> a >> b;
+
+modify(&a, &b);
+
+cout << a << endl;
+
+cout << b << endl;
+}
