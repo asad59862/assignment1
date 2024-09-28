@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+
+
+class Rectangle {
+public:
+    int field_width;
+    int field_height;
+
+
+    void display() {
+        cout << field_width << " " << field_height << endl;
+    }
+};
+
+
+class RectangleArea : public Rectangle {
+public:
+
+    void read_input() {
+        cin >> field_width;
+        cin >> field_height;
+    }
+
+
+    int area() {
+        return field_width * field_height;
+    }
+};
+
+int main() {
+
+    RectangleArea obj1;
+
+
+    obj1.read_input();
+
+
+    obj1.display();
+
+    int value = obj1.area();
+    cout << value << endl;
+
+    return 0;
+}
