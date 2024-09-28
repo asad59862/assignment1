@@ -1,0 +1,104 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+class Person {
+public:
+    string name;
+    int age;
+
+
+    virtual void getdata() = 0;
+    virtual void putdata() const = 0;
+    virtual ~Person() {}
+};
+
+
+class Professor : public Person {
+private:
+    int publications;
+    static int id_counter;
+    int cur_id;
+
+public:
+    Professor() {
+        cur_id = ++id_counter;  // Increment unique ID for each professor
+    }
+
+    // Override the getdata method to take input
+    void getdata() override {
+        cin >> name >> age >> publications;
+    }
+
+    // Override the putdata method to output professor details
+    void putdata() const override {
+        cout << name << " " << age << " " << publications << " " << cur_id << endl;
+    }
+};
+
+int Professor::id_counter = 0;  // Initialize static member
+
+// Derived class Student
+class Student : public Person {
+private:
+    int marks[6];
+    static int id_counter;
+    int cur_id;
+
+public:
+    Student() {
+        cur_id = ++id_counter;  // Increment unique ID for each student
+    }
+
+    // Override the getdata method to take input
+    void getdata() override {
+        cin >> name >> age;
+        for (int i = 0; i < 6; i++) {
+            cin >> marks[i];
+        }
+    }
+
+    // Override the putdata method to output student details
+    void putdata() const override {
+        int total_marks = 0;
+        for (int i = 0; i < 6; i++) {
+            total_marks += marks[i];
+        }
+        cout << name << " " << age << " " << total_marks << " " << cur_id << endl;
+    }
+};
+
+int Student::id_counter = 0;
+
+
+int main() {
+    int n, val;
+    cin >> n;  // The
+    Person* per[n];
+
+    for (int i = 0; i < n; i++) {
+        cin >> val;
+        if (val == 1) {
+
+            per[i] = new Professor;
+        } else {
+
+            per[i] = new Student;
+        }
+
+        per[i]->getdata();
+    }
+
+    for (int i = 0; i < n; i++) {
+        per[i]->putdata();
+    }
+
+
+    for (int i = 0; i < n; i++) {
+        delete per[i];
+    }
+
+    return 0;
+}
+
