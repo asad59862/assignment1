@@ -1,0 +1,52 @@
+#include <iostream>
+#include <string>
+#include <exception>
+
+using namespace std;
+
+class UsernameTooShortError : public exception {
+private:
+    int length;
+public:
+    UsernameTooShortError(int len) : length(len) {}
+
+
+    const char* what() const throw () {
+        static string message;
+        message = "Too short: " + to_string(length);
+        return message.c_str();
+    }
+};
+
+string validate_username(const string& username) {
+    if (username.length() < 3) {
+        throw UsernameTooShortError(username.length());
+    }
+    for (char c : username) {
+        if (!isalpha(c)) {
+            return "Invalid";
+        }
+    }
+    return "Valid";
+}
+
+
+int main() {
+    int n;
+    cin >> n;
+    cin.ignore();
+
+    for (int i = 0; i < n; ++i) {
+        string username;
+        getline(cin, username);
+
+        try {
+            string result = validate_username(username);
+            cout << result << endl;
+        } catch (const UsernameTooShortError& e) {
+            cout << e.what() << endl;
+        }
+    }
+
+    return 0;
+}
